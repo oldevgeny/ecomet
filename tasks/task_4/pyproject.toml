@@ -1,0 +1,9 @@
+[project]
+name = "ecomet-task-4"
+version = "0.1.0"
+description = "Task 4: ClickHouse queries for phrase views"
+requires-python = ">=3.13"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,0 +1,61 @@
+line-length = 120
+target-version = "py313"
+
+[lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "UP",   # pyupgrade
+    "ANN",  # flake8-annotations
+    "S",    # flake8-bandit
+    "B",    # flake8-bugbear
+    "A",    # flake8-builtins
+    "COM",  # flake8-commas
+    "C4",   # flake8-comprehensions
+    "DTZ",  # flake8-datetimez
+    "T10",  # flake8-debugger
+    "EM",   # flake8-errmsg
+    "G",    # flake8-logging-format
+    "INP",  # flake8-no-pep420
+    "PIE",  # flake8-pie
+    "T20",  # flake8-print
+    "PT",   # flake8-pytest-style
+    "Q",    # flake8-quotes
+    "RSE",  # flake8-raise
+    "RET",  # flake8-return
+    "SIM",  # flake8-simplify
+    "TID",  # flake8-tidy-imports
+    "TCH",  # flake8-type-checking
+    "ARG",  # flake8-unused-arguments
+    "PTH",  # flake8-use-pathlib
+    "ERA",  # eradicate
+    "PL",   # pylint
+    "TRY",  # tryceratops
+    "RUF",  # ruff-specific
+]
+
+ignore = [
+    "COM812",  # Missing trailing comma (conflicts with formatter)
+]
+
+[lint.per-file-ignores]
+"**/tests/**/*.py" = [
+    "S101",    # assert in tests is expected
+    "S106",    # hardcoded password in test fixtures
+    "S108",    # hardcoded temp file in tests
+    "ANN001",  # missing type annotation for function arguments
+    "ANN201",  # missing return type annotation
+    "ANN202",  # missing return type for private functions
+    "ARG001",  # unused function arguments (fixtures)
+    "PLR2004", # magic value comparison in tests
+    "PLC0415", # import outside top level (for test patches)
+    "SIM105",  # suppressible exception in tests
+]
+"__init__.py" = ["F401", "D104"]
+
+[format]
+quote-style = "double"
+indent-style = "space"

@@ -1,0 +1,69 @@
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Testing
+**/.pytest_cache/
+.coverage
+**/htmlcov/
+coverage.xml
+*.cover
+**/.hypothesis/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Linting and formatting
+**/.ruff_cache/
+**/.mypy_cache/
+**/.pytype/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+docs/
+*.docx
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.pre-commit-config.yaml
+
+# Development files
+Makefile
+setup.cfg
+.wemake.ini
+ruff.toml
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Temporary files
+*.log
+*.tmp
+tmp/
+temp/

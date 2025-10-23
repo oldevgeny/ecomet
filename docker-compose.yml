@@ -1,0 +1,94 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ecomet-postgres
+    env_file: .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:24-alpine
+    container_name: ecomet-clickhouse
+    env_file: .env
+    environment:
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB}
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: ${CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT}
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:8123/ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  task-1:
+    build:
+      context: .
+      dockerfile: tasks/task_1/Dockerfile
+    container_name: ecomet-task-1
+    ports:
+      - "8001:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  task-2:
+    build:
+      context: .
+      dockerfile: tasks/task_2/Dockerfile
+    container_name: ecomet-task-2
+    ports:
+      - "8002:8000"
+    restart: unless-stopped
+
+  task-3:
+    build:
+      context: .
+      dockerfile: tasks/task_3/Dockerfile
+    container_name: ecomet-task-3
+    ports:
+      - "8003:8000"
+    depends_on:
+      clickhouse:
+        condition: service_started
+    restart: unless-stopped
+
+  task-4:
+    build:
+      context: .
+      dockerfile: tasks/task_4/Dockerfile
+    container_name: ecomet-task-4
+    ports:
+      - "8004:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      clickhouse:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  clickhouse_data:

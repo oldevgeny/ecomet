@@ -1,0 +1,9 @@
+[project]
+name = "ecomet-task-3"
+version = "0.1.0"
+description = "Task 3: ClickHouse integration with GitHub scraper"
+requires-python = ">=3.13"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
