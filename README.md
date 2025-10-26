@@ -246,11 +246,6 @@ make test-cov
 
 **Root Level:**
 - `README.md` (this file) - Quick reference and getting started guide
-- `CLAUDE.md` - Comprehensive project documentation for AI assistants and developers
-  - Architecture deep dive
-  - Code patterns and best practices
-  - Detailed command reference
-  - Testing strategies
 - `.env.example` - Environment variables template with all available options
 
 **Task Documentation:**
@@ -284,9 +279,8 @@ make test-cov
 3. Specific task README in `tasks/task_X/`
 
 **For Development:**
-1. `CLAUDE.md` (architecture and patterns)
-2. Task-specific code in `tasks/task_X/`
-3. Shared library code in `shared/`
+1. Task-specific code in `tasks/task_X/`
+2. Shared library code in `shared/`
 
 **For Understanding Requirements:**
 1. `docs/tasks_description.md` (technical specs)
